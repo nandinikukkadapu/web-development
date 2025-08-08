@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Portfolio</title>
+
+  <!-- CSS -->
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: white;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+
+    header {
+      background-color: blue;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    img {
+      display: block;
+      margin: 20px auto;
+      border-radius: 50%;
+      width: 180px;
+      height: 180px;
+    }
+
+    section {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    h2 {
+      color: black;
+    }
+
+    a {
+      color: blue;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    button {
+      background-color: blue;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 20px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: green;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+
+
+  <header>
+    <h1>My Portfolio</h1>
+    <h3>Kukkadapu Nandini</h3>
+    <p>B.Tech Student</p>
+  </header>
+
+
+  <img src="C:\Users\kukka\OneDrive\Documents\html\photo.png" alt="Profile Photo" />
+
+
+  <section>
+
+    <h2>Basic Details</h2>
+    <p><strong>Name:</strong> Kukkadapu Nandini</p>
+    <p><strong>Education:</strong> B.Tech in Computer Science, JNTUH College Of Engineering Sulthanpur (2024 - 2027)</p>
+
+    <h2>Skills</h2>
+    <ul>
+      <li>HTML, CSS, JavaScript</li>
+      <li>Python, Java, C, PHP</li>
+      <li>SQLite, Git & GitHub</li>
+    </ul>
+
+    <h2>Projects</h2>
+    <ul>
+      <li><strong>Mess Management System</strong> – Python + SQLite project with barcode scanning for food tracking.</li>
+    </ul>
+
+    <h2>Online Profiles</h2>
+    <p>
+      <a href="https://github.com/nandinikukkadapu" target="_blank">GitHub</a><br>
+      <a href="https://www.linkedin.com/in/nandini-kukkadapu-2256a3366" target="_blank">LinkedIn</a>
+    </p>
+
+    <h2>Resume</h2>
+    <a href="C:\Users\kukka\Downloads\resume (2).pdf" target="_blank">My Resume</a>
+
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:kukkadapunandini@gmail.com">kukkadapunandini@gmail.com</a></p>
+    <button onclick="showMessage()">Contact Me</button>
+
+  </section>
+
+
+  <!-- JavaScript -->
+  <script>
+    function showMessage() {
+      alert("Thank you for your interest. Please contact me via email at kukkadapunandini@gmail.com for any queries or collaborations.");
+    }
+  </script>
+
+</body>
+</html>
