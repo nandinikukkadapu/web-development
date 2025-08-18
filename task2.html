@@ -1,62 +1,266 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <style>
-            body
-            {
-                background-color: aquamarine;
-                color: #122;
-                font-family: Arial, Helvetica, sans-serif;
-                margin: 0;
-                padding: 0;
-            }
-            .body
-            {
-                max-width: 800px;
-                margin: 40px;
-                background-color: white;
-                padding: 30px;
-                border-radius: 10px;
-                box-shadow: 0 0 10px rgba(0,0,0,0.5);
-            }
-            h1,h2{
-                color:darkred;
-            }
-            h1{
-                text-align: center;
-            }
-            p 
-            {
-                font-size: 16px;
-                line-height: 1.6;
-            }
-            img
-            {
-                width: 100%;
-                max-width: 400px;
-                display: block;
-                margin:20px;
-                border-radius: 8px;
-            }
-            a{
-                color:blue;
-                text-decoration: none;
-                font-weight: bold;
-            }
-            a:hover
-            {
-                text-decoration: underline;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>Button</h1>
-        <button onclick="showMessage()">Click Me!</button>
-        <script>
-            function showMessage()
-            {
-                alert("u clicked the button");
-            }
-            </script>
-    </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Web Project</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding: 20px;
+    }
+
+   
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background: #333;
+      color: #fff;
+    }
+
+    nav .logo {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 15px;
+    }
+
+    nav ul li {
+      cursor: pointer;
+    }
+
+    /* ---------- Contact Form ---------- */
+    .contact-form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .contact-form label {
+      display: block;
+      margin: 8px 0 5px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .contact-form button {
+      background: #333;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .contact-form button:hover {
+      background: #555;
+    }
+
+    .error {
+      color: red;
+      font-size: 0.9em;
+    }
+
+    /* ---------- To-Do List ---------- */
+    .todo {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .todo input {
+      padding: 8px;
+      width: 70%;
+      margin-right: 5px;
+    }
+
+    .todo button {
+      padding: 8px 12px;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .todo button:hover {
+      background: #555;
+    }
+
+    .task {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 8px 0;
+      padding: 8px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .task.completed span {
+      text-decoration: line-through;
+      color: gray;
+    }
+
+    
+    @media(max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  
+  <nav>
+    <div class="logo"></div>
+    <ul>
+      <li>Home</li>
+      <li>Contact</li>
+      <li>Tasks</li>
+    </ul>
+  </nav>
+
+  
+  <div class="container">
+
+    <!-- Contact Form -->
+    <div class="contact-form">
+      <h2>Contact Us</h2>
+      <form id="contactForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name">
+        <div id="nameError" class="error"></div>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email">
+        <div id="emailError" class="error"></div>
+
+        <label for="message">Message:</label>
+        <textarea id="message" rows="4"></textarea>
+        <div id="messageError" class="error"></div>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    <!-- To-Do List -->
+    <div class="todo">
+      <h2>To-Do List</h2>
+      <input type="text" id="taskInput" placeholder="Enter new task...">
+      <button onclick="addTask()">Add</button>
+      <div id="taskList"></div>
+    </div>
+
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      let valid = true;
+
+      
+      const name = document.getElementById("name").value.trim();
+      if (name === "") {
+        document.getElementById("nameError").innerText = "Name is required.";
+        valid = false;
+      } else {
+        document.getElementById("nameError").innerText = "";
+      }
+
+      
+      const email = document.getElementById("email").value.trim();
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      if (!email.match(emailPattern)) {
+        document.getElementById("emailError").innerText = "Enter a valid email.";
+        valid = false;
+      } else {
+        document.getElementById("emailError").innerText = "";
+      }
+
+      
+      const message = document.getElementById("message").value.trim();
+      if (message === "") {
+        document.getElementById("messageError").innerText = "Message cannot be empty.";
+        valid = false;
+      } else {
+        document.getElementById("messageError").innerText = "";
+      }
+
+      if (valid) {
+        alert("Form submitted successfully!");
+        document.getElementById("contactForm").reset();
+      }
+    });
+
+    // ---------- To-Do List ----------
+    function addTask() {
+      const taskInput = document.getElementById("taskInput");
+      const taskText = taskInput.value.trim();
+      if (taskText === "") return;
+
+      const taskDiv = document.createElement("div");
+      taskDiv.className = "task";
+
+      const span = document.createElement("span");
+      span.innerText = taskText;
+
+      const buttonsDiv = document.createElement("div");
+
+      const doneBtn = document.createElement("button");
+      doneBtn.innerText = "Done";
+      doneBtn.onclick = function() {
+        taskDiv.classList.toggle("completed");
+      };
+
+      const delBtn = document.createElement("button");
+      delBtn.innerText = "Delete";
+      delBtn.onclick = function() {
+        taskDiv.remove();
+      };
+
+      buttonsDiv.appendChild(doneBtn);
+      buttonsDiv.appendChild(delBtn);
+
+      taskDiv.appendChild(span);
+      taskDiv.appendChild(buttonsDiv);
+
+      document.getElementById("taskList").appendChild(taskDiv);
+
+      taskInput.value = "";
+    }
+  </script>
+</body>
 </html>
