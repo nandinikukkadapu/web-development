@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Web Project</title>
+  <style>
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f4f7fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #4CAF50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 20px auto;
+      padding: 0 15px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+      color: #4CAF50;
+    }
+
+    /* Contact Form */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    form input, form button {
+      padding: 12px;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
+
+    form input:focus {
+      outline: none;
+      border-color: #4CAF50;
+    }
+
+    form button {
+      background: #4CAF50;
+      color: white;
+      cursor: pointer;
+      border: none;
+      transition: 0.3s;
+    }
+
+    form button:hover {
+      background: #45a049;
+    }
+
+    #formMessage {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    /* ===== Quiz ===== */
+    #quiz-container p {
+      margin: 8px 0;
+    }
+
+    #quiz-container label {
+      display: block;
+      margin: 5px 0;
+    }
+
+    #submitQuiz {
+      margin-top: 10px;
+      padding: 10px 14px;
+      border: none;
+      background: #4CAF50;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    #submitQuiz:hover {
+      background: #45a049;
+    }
+
+    #quizResult {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    /*  Joke Section  */
+    #getJoke {
+      margin-top: 10px;
+      padding: 10px 14px;
+      border: none;
+      background: #4CAF50;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    #getJoke:hover {
+      background: #45a049;
+    }
+
+   
+    @media (max-width: 500px) {
+      header {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    🌐 Interactive Web Project
+  </header>
+
+  <div class="container">
+    <!-- Contact Form -->
+    <div class="card">
+      <h2>Contact Us</h2>
+      <form id="contactForm">
+        <input type="text" id="name" placeholder="Enter your name" required>
+        <input type="email" id="email" placeholder="Enter your email" required>
+        <button type="submit">Submit</button>
+      </form>
+      <p id="formMessage"></p>
+    </div>
+
+    <!-- Quiz -->
+    <div class="card" id="quiz-container">
+      <h2>Quick Quiz</h2>
+      <div id="quiz"></div>
+      <button id="submitQuiz">Submit Quiz</button>
+      <p id="quizResult"></p>
+    </div>
+
+    <!-- Joke API -->
+    <div class="card" id="joke-section">
+      <h2>Random Joke</h2>
+      <p id="joke">Click below to get a joke!</p>
+      <button id="getJoke">Get Joke</button>
+    </div>
+  </div>
+
+  <script>
+    /*  Validations  */
+    document.getElementById("contactForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("formMessage");
+
+      if (name === "" || email === "") {
+        message.style.color = "red";
+        message.innerText = "⚠️ Please fill in all fields.";
+      } else if (!/^[^ ]+@[^ ]+\.[a-z]{2,3}$/.test(email)) {
+        message.style.color = "red";
+        message.innerText = "⚠️ Please enter a valid email.";
+      } else {
+        message.style.color = "green";
+        message.innerText = `✅ Thank you, ${name}. Your form has been submitted!`;
+        document.getElementById("contactForm").reset();
+      }
+    });
+
+
+    const quizData = [
+      {
+        question: "Which language runs in a web browser?",
+        options: ["Java", "C", "Python", "JavaScript"],
+        answer: "JavaScript"
+      },
+      {
+        question: "What does CSS stand for?",
+        options: ["Central Style Sheets", "Cascading Style Sheets", "Computer Style Syntax"],
+        answer: "Cascading Style Sheets"
+      },
+      {
+        question: "What year was JavaScript launched?",
+        options: ["1996", "1995", "1994", "None of the above"],
+        answer: "1995"
+      }
+    ];
+
+    const quiz = document.getElementById("quiz");
+    const quizResult = document.getElementById("quizResult");
+
+    function loadQuiz() {
+      quiz.innerHTML = "";
+      quizData.forEach((q, index) => {
+        let qHTML = `<p><strong>${q.question}</strong></p>`;
+        q.options.forEach(option => {
+          qHTML += `
+            <label>
+              <input type="radio" name="q${index}" value="${option}">
+              ${option}
+            </label>`;
+        });
+        quiz.innerHTML += qHTML + "<hr>";
+      });
+    }
+
+    document.getElementById("submitQuiz").addEventListener("click", () => {
+      let score = 0;
+      quizData.forEach((q, index) => {
+        const answer = document.querySelector(`input[name="q${index}"]:checked`);
+        if (answer && answer.value === q.answer) score++;
+      });
+      quizResult.innerText = `🎯 You scored ${score}/${quizData.length}`;
+    });
+
+    loadQuiz();
+
+    
+    document.getElementById("getJoke").addEventListener("click", async () => {
+      const response = await fetch("https://official-joke-api.appspot.com/random_joke");
+      const data = await response.json();
+      document.getElementById("joke").innerText = `${data.setup} - ${data.punchline}`;
+    });
+  </script>
+</body>
+</html>
