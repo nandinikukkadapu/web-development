@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Portfolio Project</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background: #0077b6;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background: #023e8a;
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    nav a:hover { text-decoration: underline; }
+
+    section {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      display: none;
+    }
+    section.active { display: block; }
+
+    
+    #portfolio img {
+      display: block;
+      margin: 20px auto;
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      border: 3px solid #0077b6;
+    }
+    #portfolio h2 { border-bottom: 2px solid #eee; padding-bottom: 5px; }
+    .project-card {
+      background: #f1f1f1;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .project-card:hover {
+      transform: scale(1.02);
+      background: #e9f5ff;
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 6px;
+    }
+    .contact-form button {
+      background: #0077b6;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .contact-form button:hover { background: green; }
+
+   
+    .todo input { padding: 8px; width: 70%; }
+    .todo button { padding: 8px 12px; }
+    .todo ul { list-style: none; padding: 0; }
+    .todo li {
+      background: #eee; margin: 5px 0; padding: 8px;
+      border-radius: 5px; display: flex; justify-content: space-between;
+    }
+
+   
+    .filters { margin-bottom: 20px; }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #fdfdfd;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+   
+    @media (max-width: 600px) {
+      #portfolio img { width: 100px; height: 100px; }
+      section { padding: 15px; }
+      nav a { margin: 0 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Portfolio Website</h1>
+  <h3>Kukkadapu Nandini</h3>
+  <p>B.Tech Student</p>
+</header>
+
+<nav>
+  <a onclick="showSection('portfolio')">Portfolio</a>
+  <a onclick="showSection('todo')">To-Do App</a>
+  <a onclick="showSection('products')">Products</a>
+</nav>
+
+<!-- Portfolio Section -->
+<section id="portfolio" class="active">
+  <img src="C:\Users\kukka\OneDrive\Documents\html\photo.png" alt="Profile Photo" />
+
+  <h2>About Me</h2>
+  <p><strong>Name:</strong> Kukkadapu Nandini</p>
+  <p><strong>Education:</strong> B.Tech in Computer Science, JNTUH College Of Engineering Sulthanpur (2024 - 2027)</p>
+
+  <h2>Skills</h2>
+  <ul>
+    <li>HTML, CSS, JavaScript</li>
+    <li>Python, Java, C, PHP</li>
+    <li>SQLite, Git & GitHub</li>
+  </ul>
+
+  <h2>Projects</h2>
+  <div class="project-card">
+    <strong>Mess Management System</strong>
+    <p>Python + SQLite project with barcode scanning for food tracking.</p>
+  </div>
+
+  <h2>Online Profiles</h2>
+  <p>
+    <a href="https://github.com/nandinikukkadapu" target="_blank">GitHub</a><br>
+    <a href="https://www.linkedin.com/in/nandini-kukkadapu-2256a3366" target="_blank">LinkedIn</a>
+  </p>
+
+  <h2>Resume</h2>
+  <a href="resume.pdf" target="_blank">Download My Resume</a>
+
+  <h2>Contact</h2>
+  <form class="contact-form" action="mailto:kukkadapunandini@gmail.com" method="post" enctype="text/plain">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+
+<section id="todo" class="todo">
+  <h2>My To-Do List</h2>
+  <input type="text" id="taskInput" placeholder="Enter task" />
+  <button onclick="addTask()">Add</button>
+  <ul id="taskList"></ul>
+</section>
+
+
+<section id="products">
+  <h2>Product Listing</h2>
+  <div class="filters">
+    <label>Category:
+      <select id="categoryFilter" onchange="filterProducts()">
+        <option value="all">All</option>
+        <option value="electronics">Electronics</option>
+        <option value="clothing">Clothing</option>
+        <option value="books">Books</option>
+      </select>
+    </label>
+
+    <label>Sort By:
+      <select id="sortFilter" onchange="filterProducts()">
+        <option value="default">Default</option>
+        <option value="priceLow">Price: Low to High</option>
+        <option value="priceHigh">Price: High to Low</option>
+        <option value="rating">Rating</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="products" id="productList"></div>
+</section>
+
+<script>
+
+  function showSection(id) {
+    document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+  }
+
+  // To-Do App
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  function renderTasks() {
+    const list = document.getElementById("taskList");
+    list.innerHTML = "";
+    tasks.forEach((task, i) => {
+      list.innerHTML += `<li>${task} 
+        <button onclick="deleteTask(${i})">X</button>
+      </li>`;
+    });
+  }
+  function addTask() {
+    const input = document.getElementById("taskInput");
+    if (input.value.trim() === "") return;
+    tasks.push(input.value);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    input.value = "";
+    renderTasks();
+  }
+  function deleteTask(i) {
+    tasks.splice(i, 1);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    renderTasks();
+  }
+  renderTasks();
+
+  
+  const products = [
+    { name: "Laptop", category: "electronics", price: 60000, rating: 4.5 },
+    { name: "T-Shirt", category: "clothing", price: 500, rating: 4.0 },
+    { name: "Smartphone", category: "electronics", price: 25000, rating: 4.7 },
+    { name: "Novel Book", category: "books", price: 300, rating: 4.3 },
+    { name: "Headphones", category: "electronics", price: 1500, rating: 4.2 }
+  ];
+  function renderProducts(list) {
+    const container = document.getElementById("productList");
+    container.innerHTML = "";
+    list.forEach(p => {
+      container.innerHTML += `
+        <div class="card">
+          <h3>${p.name}</h3>
+          <p>Category: ${p.category}</p>
+          <p>Price: ₹${p.price}</p>
+          <p>Rating: ⭐${p.rating}</p>
+        </div>`;
+    });
+  }
+  function filterProducts() {
+    let filtered = [...products];
+    const category = document.getElementById("categoryFilter").value;
+    const sort = document.getElementById("sortFilter").value;
+
+    if (category !== "all") filtered = filtered.filter(p => p.category === category);
+    if (sort === "priceLow") filtered.sort((a, b) => a.price - b.price);
+    if (sort === "priceHigh") filtered.sort((a, b) => b.price - a.price);
+    if (sort === "rating") filtered.sort((a, b) => b.rating - a.rating);
+
+    renderProducts(filtered);
+  }
+  renderProducts(products);
+</script>
+
+</body>
+</html>
