@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Portfolio</title>
+  <style>
+    :root {
+      --bg: #f9f9f9;
+      --fg: #222;
+      --accent: #0b7cff;
+      --muted: #666;
+    }
+    [data-theme="dark"] {
+      --bg: #0b1220;
+      --fg: #e6eef8;
+      --muted: #9fb3d6;
+    }
+    * { box-sizing: border-box; margin:0; padding:0 }
+    body {
+      font-family: "Segoe UI", sans-serif;
+      line-height: 1.6;
+      background: var(--bg);
+      color: var(--fg);
+      transition: background 0.3s, color 0.3s;
+    }
+    header {
+      position: sticky;
+      top:0; z-index:1000;
+      background: var(--bg);
+      border-bottom:1px solid rgba(0,0,0,0.1);
+    }
+    nav {
+      display:flex; justify-content:space-between; align-items:center;
+      max-width:1100px; margin:auto; padding:1rem;
+    }
+    nav a {
+      margin-left:1rem; text-decoration:none; color:var(--fg);
+      font-weight:500; transition: color .2s;
+    }
+    nav a:hover { color: var(--accent); }
+    .logo { font-size:1.2rem; font-weight:700; color: var(--accent); }
+    #themeToggle { cursor:pointer; padding:0.3rem 0.7rem; border:1px solid var(--muted); border-radius:5px; background:none; color:var(--fg);}
+    section {
+      max-width:1100px; margin:auto; padding:3rem 1rem;
+    }
+    h1,h2,h3 { margin-bottom:1rem; }
+    .hero {
+      display:flex; flex-direction:column; align-items:center; text-align:center; padding:5rem 1rem;
+    }
+    .hero img {
+      width:150px; height:150px; border-radius:50%; object-fit:cover; margin-bottom:1rem;
+      border:4px solid var(--accent);
+    }
+    .skills ul {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:1rem;
+      list-style:none; margin-top:1rem;
+    }
+    .skills li {
+      background:rgba(0,0,0,0.05); padding:1rem; border-radius:8px; text-align:center;
+    }
+    [data-theme="dark"] .skills li { background: rgba(255,255,255,0.05); }
+    .projects-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem;
+    }
+    .card {
+      background:rgba(0,0,0,0.03); border-radius:10px; overflow:hidden;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .card:hover { transform: translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,0.2);}
+    .card img { width:100%; height:180px; object-fit:cover; }
+    .card-body { padding:1rem; }
+    .card-body h3 { margin:0 0 .5rem; }
+    .contact form {
+      display:grid; gap:1rem; max-width:600px; margin:auto;
+    }
+    input,textarea {
+      width:100%; padding:0.7rem; border-radius:5px; border:1px solid rgba(0,0,0,0.2);
+      font-family:inherit;
+    }
+    button {
+      background:var(--accent); color:#fff; padding:0.7rem; border:none; border-radius:5px; cursor:pointer;
+    }
+    footer {
+      text-align:center; padding:1.5rem; border-top:1px solid rgba(0,0,0,0.1);
+      color:var(--muted);
+    }
+    @media(max-width:600px){
+      nav { flex-direction:column; }
+      nav a { margin:0.5rem 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">MyPortfolio</div>
+      <div>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <button id="themeToggle">🌙</button>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero" id="hero">
+    <img src="C:\Users\kukka\OneDrive\Documents\html\photo.png" alt="Profile Photo">
+    <h1>Hello, I'm <span style="color:var(--accent)">Nandini</span></h1>
+    <p>Web Developer • Designer • Tech Enthusiast</p>
+  </section>
+
+  <section class="about" id="about">
+    <h2>About Me</h2>
+    <p>
+      I'm a passionate web developer specializing in building responsive, user-friendly, and visually appealing web applications. I love solving problems, learning new technologies, and turning ideas into reality.
+    </p>
+  </section>
+
+  <section class="skills" id="skills">
+    <h2>Skills</h2>
+    <ul>
+      <li>HTML5</li>
+      <li>CSS3</li>
+      <li>JavaScript</li>
+      <li>React</li>
+      <li>Node.js</li>
+      <li>Python</li>
+    </ul>
+  </section>
+
+  <section class="projects" id="projects">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      <div class="card">
+        <img src="https://via.placeholder.com/400x180?text=Mess+Management" alt="Mess Management System">
+        <div class="card-body">
+          <h3>Mess Management System</h3>
+          <p>A complete system built with Python (Tkinter + SQLite) for managing student meals, logins, and barcode-based attendance tracking.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/400x180?text=Portfolio+Website" alt="Portfolio Website">
+        <div class="card-body">
+          <h3>Portfolio Website</h3>
+          <p>A responsive personal portfolio built with HTML, CSS, and JavaScript showcasing skills, projects, and contact form.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/400x180?text=Advanced+Portfolio" alt="Advanced Portfolio">
+        <div class="card-body">
+          <h3>Advanced Portfolio</h3>
+          <p>An upgraded portfolio with dark/light mode, smooth scrolling, and interactive design for better user experience.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>Contact Me</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 Your Name. Built with ❤️ and HTML/CSS/JS.</p>
+  </footer>
+
+  <script>
+    // Smooth scroll
+    document.querySelectorAll('nav a').forEach(link=>{
+      link.addEventListener('click', e=>{
+        e.preventDefault();
+        document.querySelector(link.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+      });
+    });
+
+    // Theme toggle
+    const themeToggle=document.getElementById('themeToggle');
+    themeToggle.addEventListener('click',()=>{
+      const isDark=document.documentElement.getAttribute('data-theme')==='dark';
+      document.documentElement.setAttribute('data-theme',isDark?'light':'dark');
+      themeToggle.textContent=isDark?'🌙':'☀️';
+      localStorage.setItem('pref_theme',!isDark);
+    });
+    // Init theme
+    if(localStorage.getItem('pref_theme')==='true'){
+      document.documentElement.setAttribute('data-theme','dark');
+      themeToggle.textContent='☀️';
+    }
+  </script>
+</body>
+</html>
